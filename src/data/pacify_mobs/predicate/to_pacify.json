@@ -5,42 +5,54 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "nbt": {"CustomName": "\"pacify me\""}
+        "components": {
+          "minecraft:custom_name": "pacify me"
+        }
       }
     },
     {
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "nbt": {"CustomName": "\"Pacify me\""}
+        "components": {
+          "minecraft:custom_name": "Pacify me"
+        }
       }
     },
     {
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "nbt": {"CustomName": "\"Pacify Me\""}
+        "components": {
+          "minecraft:custom_name": "Pacify Me"
+        }
       }
     },
     {
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "nbt": {"CustomName": "\"pacify_me\""}
+        "components": {
+          "minecraft:custom_name": "pacify_me"
+        }
       }
     },
     {
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "nbt": {"CustomName": "\"Pacify_me\""}
+        "components": {
+          "minecraft:custom_name": "Pacify_me"
+        }
       }
     },
     {
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "nbt": {"CustomName": "\"Pacify_Me\""}
+        "components": {
+          "minecraft:custom_name": "Pacify_Me"
+        }
       }
     }
   ]

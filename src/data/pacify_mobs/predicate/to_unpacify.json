@@ -5,7 +5,18 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "nbt": {"CustomName": "\"sock\""}
+        "components": {
+          "minecraft:custom_name": "sock"
+        }
+      }
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "components": {
+          "minecraft:custom_name": "Sock"
+        }
       }
     }
   ]

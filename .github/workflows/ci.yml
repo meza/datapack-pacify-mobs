@@ -29,13 +29,14 @@ jobs:
           node-version: 20
 
       - name: "🧵 Install semantic release"
-        run: npm i --location=global semantic-release conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/changelog @semantic-release/exec semantic-release-export-data
+        run: npm i --location=global semantic-release conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/changelog @semantic-release/exec semantic-release-export-data semantic-release-discord-notifier
 
       - name: "🔢 Determine version"
         run: npx semantic-release --dry-run
         id: get-next-version
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: "ℹ️ Needs Release?"
         run: echo "Needs release published? ${{ steps.get-next-version.outputs.new-release-published == 'true' }}"
@@ -48,5 +49,6 @@ jobs:
         if: ${{ steps.get-next-version.outputs.new-release-published == 'true'  }}
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: npx semantic-release
 

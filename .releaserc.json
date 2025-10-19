@@ -43,7 +43,7 @@
     ["semantic-release-discord-notifier", {
       "embedJson": {
         "username": "Pacify Me Datapack",
-        "avatar_url": "https://avatars.githubusercontent.com/u/211977?s=48&v=4",
+        "avatar_url": "https://github.com/meza/datapack-pacify-mobs/raw/main/logo.png",
         "content": "# :rocket: ${nextRelease.version} just dropped",
         "embeds": [
           {
@@ -61,6 +61,12 @@
                 "style": 5,
                 "label": "Download from GitHub",
                 "url": "https://github.com/meza/datapack-pacify-mobs/releases"
+              },
+              {
+                "type": 2,
+                "style": 5,
+                "label": "Download from Modrinth",
+                "url": "https://modrinth.com/datapack/pacify-mobs"
               }
             ]
           }

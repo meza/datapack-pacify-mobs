@@ -18,13 +18,13 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: "⬇️ Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: "🔃 Use Latest Node.js"
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
 
@@ -43,7 +43,7 @@ jobs:
 
       - name: "Package and Publish"
         if: ${{ steps.get-next-version.outputs.new-release-published == 'true'  }}
-        run: cd src && zip -r ../Pacify_Mobs_1.21-${{ steps.get-next-version.outputs.new-release-version }}.zip *
+        run: cd src && zip -r ../Pacify-Mobs-${{ steps.get-next-version.outputs.new-release-version }}.zip *
 
       - name: "🏗️ Build & Release to GitHub"
         if: ${{ steps.get-next-version.outputs.new-release-published == 'true'  }}
@@ -52,3 +52,19 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: npx semantic-release
 
+      - uses: Kir-Antipov/mc-publish@v3.3
+        name: "🚀 Publish on modrinth"
+        if: ${{ steps.get-next-version.outputs.new-release-published == 'true' }}
+        with:
+          version-type: ${{ env.TYPE }}
+          name: Pacify Mobs v${{ steps.get-next-version.outputs.new-release-version }}
+          version: ${{ steps.get-next-version.outputs.new-release-version }}
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          changelog-file: CHANGELOG.*
+          files: Pacify-Mobs-${{ steps.get-next-version.outputs.new-release-version }}.zip
+          loaders: |
+            datapack
+          game-versions: |
+            >=1.21.9
+          game-version-filter: releases

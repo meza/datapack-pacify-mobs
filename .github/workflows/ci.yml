@@ -26,7 +26,7 @@ jobs:
       - name: "🔃 Use Latest Node.js"
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
 
       - name: "🧵 Install semantic release"
         run: npm i --location=global semantic-release conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/changelog @semantic-release/exec semantic-release-export-data semantic-release-discord-notifier

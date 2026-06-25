@@ -21,12 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "⬇️ Checkout"
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.0
 
       - name: "🔃 Use Latest Node.js"
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6.4.0
         with:
-          node-version: 24
+          node-version: 24.18.0
 
       - name: "🧵 Install semantic release"
         run: npm i --location=global semantic-release conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/changelog @semantic-release/exec semantic-release-export-data semantic-release-discord-notifier
@@ -52,7 +52,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: npx semantic-release
 
-      - uses: Kir-Antipov/mc-publish@v3.3
+      - uses: Kir-Antipov/mc-publish@v3.3.0
         name: "🚀 Publish on modrinth"
         if: ${{ steps.get-next-version.outputs.new-release-published == 'true' }}
         with:

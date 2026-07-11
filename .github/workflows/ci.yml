@@ -35,7 +35,7 @@ jobs:
         run: npx semantic-release --dry-run
         id: get-next-version
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: "ℹ️ Needs Release?"
@@ -48,7 +48,7 @@ jobs:
       - name: "🏗️ Build & Release to GitHub"
         if: ${{ steps.get-next-version.outputs.new-release-published == 'true'  }}
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: npx semantic-release
 

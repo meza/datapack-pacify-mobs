@@ -13,3 +13,8 @@ Prerequisite: You must understand what [Minecraft Datapacks](https://minecraft.w
 6. Make the necessary changes to the affected files to make them compatible with the new minecraft version.
 7. Update the `max_format` and `min_format` fields in the `src/pack.mcmeta` file to the new version. - only update the min_format if it's necessary, otherwise keep it as is to maintain compatibility with older versions of minecraft.
 8. Tell the user to test the datapack in a local minecraft instance before pushing the changes to the repository. This is important because some changes might require additional adjustments that are not covered in the changelogs, and testing will help identify those issues before they affect the server.
+
+
+## WARNING
+
+- you won't be able to test this datapack in a server instance. Mobs require players. Don't even try.

@@ -1,0 +1,48 @@
+name: Check Minecraft version
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: check-minecraft-version
+  cancel-in-progress: false
+
+jobs:
+  check-version:
+    runs-on: meza-ubuntu-slim
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.18.0
+
+      - name: Restore Minecraft pack-version cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .github/minecraft-pack-versions.cache.json
+          key: minecraft-pack-versions-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            minecraft-pack-versions-${{ runner.os }}-
+
+      - name: Fetch Minecraft pack versions
+        uses: meza/action-minecraft-pack-versions@6718a39243a5c34a166e46c84e8738617a77636f # v1.0.25
+        with:
+          output_path: .github/minecraft-pack-versions.cache.json
+          cutoff_version: 26.2
+          commit_enabled: false
+
+      - name: Check for a stable Minecraft update
+        run: node .github/scripts/check-minecraft-version.mjs src/pack.mcmeta .github/minecraft-pack-versions.cache.json
+        env:
+          GITHUB_API_URL: ${{ github.api_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ github.token }}

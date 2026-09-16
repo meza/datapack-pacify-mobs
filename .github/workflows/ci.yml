@@ -15,6 +15,20 @@ permissions:
 
 env:
   TYPE: ${{ endsWith(github.ref_name, 'beta') && 'beta' || 'release' }}
+  # renovate: datasource=npm depName=semantic-release
+  SEMANTIC_RELEASE_VERSION: "25.0.9"
+  # renovate: datasource=npm depName=conventional-changelog-conventionalcommits
+  CONVENTIONAL_CHANGELOG_CONVENTIONALCOMMITS_VERSION: "9.3.1"
+  # renovate: datasource=npm depName=@semantic-release/github
+  SEMANTIC_RELEASE_GITHUB_VERSION: "12.0.9"
+  # renovate: datasource=npm depName=@semantic-release/changelog
+  SEMANTIC_RELEASE_CHANGELOG_VERSION: "7.0.0"
+  # renovate: datasource=npm depName=@semantic-release/exec
+  SEMANTIC_RELEASE_EXEC_VERSION: "7.1.0"
+  # renovate: datasource=npm depName=semantic-release-export-data
+  SEMANTIC_RELEASE_EXPORT_DATA_VERSION: "1.2.0"
+  # renovate: datasource=npm depName=semantic-release-discord-notifier
+  SEMANTIC_RELEASE_DISCORD_NOTIFIER_VERSION: "1.1.3"
 
 jobs:
   build:
@@ -29,7 +43,15 @@ jobs:
           node-version: 24.18.0
 
       - name: "🧵 Install semantic release"
-        run: npm i --location=global semantic-release conventional-changelog-conventionalcommits @semantic-release/github @semantic-release/changelog @semantic-release/exec semantic-release-export-data semantic-release-discord-notifier
+        run: >-
+          npm i --location=global
+          "semantic-release@$SEMANTIC_RELEASE_VERSION"
+          "conventional-changelog-conventionalcommits@$CONVENTIONAL_CHANGELOG_CONVENTIONALCOMMITS_VERSION"
+          "@semantic-release/github@$SEMANTIC_RELEASE_GITHUB_VERSION"
+          "@semantic-release/changelog@$SEMANTIC_RELEASE_CHANGELOG_VERSION"
+          "@semantic-release/exec@$SEMANTIC_RELEASE_EXEC_VERSION"
+          "semantic-release-export-data@$SEMANTIC_RELEASE_EXPORT_DATA_VERSION"
+          "semantic-release-discord-notifier@$SEMANTIC_RELEASE_DISCORD_NOTIFIER_VERSION"
 
       - name: "🔢 Determine version"
         run: npx semantic-release --dry-run
@@ -66,5 +88,5 @@ jobs:
           loaders: |
             datapack
           game-versions: |
-            >=1.21.9
+            26.3
           game-version-filter: releases

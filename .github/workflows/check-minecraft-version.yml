@@ -34,7 +34,7 @@ jobs:
             minecraft-pack-versions-${{ runner.os }}-
 
       - name: Fetch Minecraft pack versions
-        uses: meza/action-minecraft-pack-versions@6718a39243a5c34a166e46c84e8738617a77636f # v1.0.25
+        uses: meza/action-minecraft-pack-versions@09bd26e125420733c0ae208c3e4b23b53ce1c69a # v1.1.0
         with:
           output_path: .github/minecraft-pack-versions.cache.json
           cutoff_version: 26.2

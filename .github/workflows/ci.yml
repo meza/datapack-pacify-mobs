@@ -16,7 +16,7 @@ permissions:
 env:
   TYPE: ${{ endsWith(github.ref_name, 'beta') && 'beta' || 'release' }}
   # renovate: datasource=npm depName=semantic-release
-  SEMANTIC_RELEASE_VERSION: "25.0.9"
+  SEMANTIC_RELEASE_VERSION: "26.0.1"
   # renovate: datasource=npm depName=conventional-changelog-conventionalcommits
   CONVENTIONAL_CHANGELOG_CONVENTIONALCOMMITS_VERSION: "9.3.1"
   # renovate: datasource=npm depName=@semantic-release/github
